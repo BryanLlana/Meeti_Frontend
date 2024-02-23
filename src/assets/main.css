@@ -355,9 +355,18 @@ main.contenedor-formularios {
 
 .default-form .campo {
   display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
+
+@media (width >= 768px){
+  .default-form .campo {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
 .campo.acciones {
   justify-content: space-between;
   padding: 1rem 0;
@@ -366,9 +375,13 @@ main.contenedor-formularios {
   justify-content: flex-end;
   padding-top: 2rem;
 }
-.default-form .campo label {
-  flex: 0 0 120px;
+
+@media (width >= 768px){
+  .default-form .campo label {
+    flex: 0 0 120px;
+  }
 }
+
 .default-form .campo input[type="text"],
 .default-form .campo input[type="password"],
 .default-form .campo input[type="email"],
@@ -404,11 +417,14 @@ trix-editor  {
 trix-editor h1 {
   text-align: left!important;
 }
-.campo.descripcion label {
-  display: block;
-  margin-bottom: 2rem;
-  align-self: flex-start;
-  padding-top: 4rem;
+
+@media (width >= 768px){
+  .campo.descripcion label {
+    display: block;
+    margin-bottom: 2rem;
+    align-self: flex-start;
+    padding-top: 4rem;
+  }
 }
 trix-toolbar, 
 trix-editor {

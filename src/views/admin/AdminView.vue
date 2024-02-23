@@ -1,0 +1,53 @@
+<script setup>
+import MeetiLayout from '@/layout/MeetiLayout.vue';
+import { RouterLink } from 'vue-router';
+</script>
+
+<template>
+  <MeetiLayout>
+    <main class="contenedor panel-administracion">
+      <h1>Panel de Administración</h1>
+
+      <div class="contenedor-botones">
+        <RouterLink :to="{ name: 'new-group' }" class="btn btn-amarillo">Nuevo Grupo</RouterLink>
+        <RouterLink :to="{ name: 'admin' }" class="btn btn-azul">Nuevo Meeti</RouterLink>
+        <RouterLink :to="{ name: 'admin' }" class="btn btn-rosa">Editar Perfil</RouterLink>
+        <RouterLink :to="{ name: 'admin' }" class="btn btn-amarillo">Imagen Perfil</RouterLink>
+      </div>
+
+      <div class="seccion-admin">
+        <h2>Tus Meetis</h2>
+        <ul>
+          <li>
+            <div class="informacion-admin">
+              <p class="fecha">Lunes, 22 de Mayo 2024</p>
+              <h3>E-Commerce</h3>
+              <small>23 Asistentes</small>
+            </div>
+            <div class="acciones contenedor-botones">
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-verde">Editar</RouterLink>
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Asistentes</RouterLink>
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-rojo">Eliminar</RouterLink>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="seccion-admin">
+        <h2>Tus Grupos</h2>
+        <ul>
+          <li>
+            <div class="informacion-admin">
+              <h3>E-Commerce</h3>
+            </div>
+            <div class="acciones contenedor-botones">
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-verde">Editar</RouterLink>
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Asistentes</RouterLink>
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-rojo">Eliminar</RouterLink>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </MeetiLayout>
+</template>

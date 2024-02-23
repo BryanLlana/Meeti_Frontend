@@ -13,6 +13,16 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: () => import('@/views/auth/RegisterView.vue')
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('@/views/admin/AdminView.vue')
+    },
+    {
+      path: '/nuevo-grupo',
+      name: 'new-group',
+      component: () => import('@/views/admin/group/NewGroupView.vue')
     }
   ]
 })
