@@ -1,5 +1,13 @@
 <script setup>
 import MeetiLayout from '@/layout/MeetiLayout.vue';
+import { useCategoryStore } from '@/stores/category'
+import { onMounted } from 'vue';
+
+const categoryStore = useCategoryStore()
+
+onMounted(async () => {
+  await categoryStore.getCategories()
+})
 </script>
 
 <template>
@@ -23,6 +31,11 @@ import MeetiLayout from '@/layout/MeetiLayout.vue';
           <label for="category">Categoría</label>
           <select id="category">
             <option value="" selected disabled>--Seleccione una categoría--</option>
+            <option
+              v-for="category in categoryStore.categories"
+              :value="category.id"
+            >{{ category.name }}
+            </option>
           </select>  
         </div>
         <div class="campo">
