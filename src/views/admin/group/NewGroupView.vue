@@ -30,6 +30,7 @@ const readImage = e => {
           <label for="title">Título</label>
           <input v-model="groupStore.newGroup.title" type="text" id="title" placeholder="Ejm: Grupo Maravilla">
         </div>
+        <p class="error-input" v-if="groupStore.errorInput.title">{{ groupStore.errorInput.title }}</p>
         <div class="campo descripcion">
           <label for="description">Descripción</label>
           <div class="contenedor-editor">
@@ -37,6 +38,7 @@ const readImage = e => {
             <trix-editor @input="inputDescription" input="x"></trix-editor>
           </div>
         </div>
+        <p class="error-input" v-if="groupStore.errorInput.description">{{ groupStore.errorInput.description }}</p>
         <div class="campo">
           <label for="category">Categoría</label>
           <select v-model="groupStore.newGroup.category" id="category">
@@ -48,13 +50,15 @@ const readImage = e => {
             </option>
           </select>  
         </div>
+        <p class="error-input" v-if="groupStore.errorInput.category">{{ groupStore.errorInput.category }}</p>
         <div class="campo">
           <label for="image">Imagen</label>
           <input @change="readImage" type="file" id="image">
         </div>
+        <p class="error-input" v-if="groupStore.errorInput.image">{{ groupStore.errorInput.image }}</p>
         <div class="campo">
           <label for="website">Sitio Web</label>
-          <input v-model="groupStore.newGroup.url" type="url" id="website" placeholder="Ejm: wwww.grupo.com">
+          <input v-model="groupStore.newGroup.website" type="url" id="website" placeholder="Ejm: wwww.grupo.com">
         </div>
         <div class="campo enviar">
           <input type="submit" class="btn btn-rosa" value="Crear Grupo">
