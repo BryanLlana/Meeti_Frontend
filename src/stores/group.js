@@ -87,6 +87,34 @@ export const useGroupStore = defineStore('group', () => {
     }
   }
 
+  const updateGroup = async e => {
+    errorInput.value = {}
+    e.preventDefault()
+
+    if (editGroup.title === '') errorInput.value.title = 'El título es obligatorio'
+    if (editGroup.description === '') errorInput.value.description = 'La descripción es obligatoria'
+    if (editGroup.category === '') errorInput.value.category = 'La categoría es obligatoria'
+
+    if (Object.values(errorInput.value).length === 0) {
+      try {
+        const { id, ...values } = editGroup
+        await groupApi.updateGroup(id, values)
+        editGroup.id = ''
+        editGroup.title = ''
+        editGroup.description = ''
+        editGroup.category = ''
+        editGroup.website = ''
+        toast.open({
+          message: 'Grupo editado correctamente',
+          type: 'success'
+        })
+        router.push({ name: 'admin' })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
   return {
     newGroup,
     groups,
@@ -94,6 +122,7 @@ export const useGroupStore = defineStore('group', () => {
     createGroup,
     getGroup,
     getGroups,
+    updateGroup,
     errorInput
   }
 })

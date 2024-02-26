@@ -12,5 +12,8 @@ export const groupApi = {
   },
   findGroup: async id => {
     return await api.get(`/group/${id}`)
-  } 
+  },
+  updateGroup: async (id, data) => {
+    return await api.patch(`/group/${id}`, data)
+  }
 }
