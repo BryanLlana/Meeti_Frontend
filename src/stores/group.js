@@ -15,6 +15,16 @@ export const useGroupStore = defineStore('group', () => {
     image: '',
     category: ''
   })
+
+  const editGroup = reactive({
+    id: '',
+    title: '',
+    description: '',
+    website: '',
+    image: '',
+    category: ''
+  })
+
   const groups = ref([])
 
   const getGroups = async () => {
@@ -59,10 +69,30 @@ export const useGroupStore = defineStore('group', () => {
     }
   }
 
+  const getGroup = async (id) => {
+    try {
+      const { data } = await groupApi.findGroup(id)
+      const { category, ...values } = data
+      Object.assign(editGroup, {
+        ...values,
+        category: category.id
+      })
+    } catch (error) {
+      toast.open({
+        message: error.response.data.message,
+        type: 'error'
+      })
+      router.push({ name: 'admin' })
+      console.log(error)
+    }
+  }
+
   return {
     newGroup,
     groups,
+    editGroup,
     createGroup,
+    getGroup,
     getGroups,
     errorInput
   }

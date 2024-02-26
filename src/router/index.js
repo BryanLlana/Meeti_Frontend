@@ -23,6 +23,11 @@ const router = createRouter({
       path: '/nuevo-grupo',
       name: 'new-group',
       component: () => import('@/views/admin/group/NewGroupView.vue')
+    },
+    {
+      path: '/editar-grupo/:id',
+      name: 'edit-group',
+      component: () => import('@/views/admin/group/EditGroupView.vue')
     }
   ]
 })

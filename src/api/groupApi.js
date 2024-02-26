@@ -9,5 +9,8 @@ export const groupApi = {
   },
   findGroups: async () => {
     return await api.get('/group')
-  }
+  },
+  findGroup: async id => {
+    return await api.get(`/group/${id}`)
+  } 
 }

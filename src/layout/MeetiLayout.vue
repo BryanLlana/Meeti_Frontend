@@ -8,7 +8,7 @@ import { RouterLink } from 'vue-router';
       <img src="/img/logo.png" alt="Logo Meeti">
     </RouterLink>
     <nav class="nav">
-      <RouterLink :to="{ name: 'home' }">Crear Grupo</RouterLink>
+      <RouterLink :to="{ name: 'new-group' }">Crear Grupo</RouterLink>
       <RouterLink :to="{ name: 'home' }">Iniciar Sesión</RouterLink>
       <RouterLink :to="{ name: 'register' }">Registrarse</RouterLink>
     </nav>
@@ -16,7 +16,7 @@ import { RouterLink } from 'vue-router';
   <slot />
   <footer class="site-footer contenedor">
     <nav class="nav">
-      <RouterLink :to="{ name: 'home' }">Crear Grupo</RouterLink>
+      <RouterLink :to="{ name: 'new-group' }">Crear Grupo</RouterLink>
       <RouterLink :to="{ name: 'home' }">Iniciar Sesión</RouterLink>
       <RouterLink :to="{ name: 'register' }">Registrarse</RouterLink>
     </nav>

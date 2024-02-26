@@ -52,7 +52,7 @@ onMounted(async () => {
               <h3>{{ group.title }}</h3>
             </div>
             <div class="acciones contenedor-botones">
-              <RouterLink :to="{ name: 'admin' }" class="btn btn-verde">Editar</RouterLink>
+              <RouterLink :to="{ name: 'edit-group', params: { id: group.id } }" class="btn btn-verde">Editar</RouterLink>
               <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Imagen</RouterLink>
               <RouterLink :to="{ name: 'admin' }" class="btn btn-rojo">Eliminar</RouterLink>
             </div>
