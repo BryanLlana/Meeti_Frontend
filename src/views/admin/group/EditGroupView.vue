@@ -24,7 +24,7 @@ const inputDescription = e => {
     <main class="contenedor contenedor-formularios no-padding">
       <h1>Editar Grupo: {{ groupStore.editGroup.title }}</h1>
 
-      <form @submit="groupStore.updateGroup" class="default-form">
+      <form @submit.prevent="groupStore.updateGroup" class="default-form">
         <div class="campo">
           <label for="title">Título</label>
           <input v-model="groupStore.editGroup.title" type="text" id="title" placeholder="Ejm: Grupo Maravilla">

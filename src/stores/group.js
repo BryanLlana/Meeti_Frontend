@@ -25,6 +25,8 @@ export const useGroupStore = defineStore('group', () => {
     category: ''
   })
 
+  const imageNow = ref('')
+
   const groups = ref([])
 
   const getGroups = async () => {
@@ -70,6 +72,7 @@ export const useGroupStore = defineStore('group', () => {
   }
 
   const getGroup = async (id) => {
+    errorInput.value = {}
     try {
       const { data } = await groupApi.findGroup(id)
       const { category, ...values } = data
@@ -87,9 +90,8 @@ export const useGroupStore = defineStore('group', () => {
     }
   }
 
-  const updateGroup = async e => {
+  const updateGroup = async () => {
     errorInput.value = {}
-    e.preventDefault()
 
     if (editGroup.title === '') errorInput.value.title = 'El título es obligatorio'
     if (editGroup.description === '') errorInput.value.description = 'La descripción es obligatoria'
@@ -115,6 +117,41 @@ export const useGroupStore = defineStore('group', () => {
     }
   }
 
+  const updateImage = async () => {
+    errorInput.value = {}
+    if (typeof editGroup.image === 'string') errorInput.value.image = 'La imagen es obligatoria'
+
+    if (Object.values(errorInput.value).length === 0) {
+      const formData = new FormData()
+      formData.append('image', editGroup.image)
+
+      try {
+        const { data: image } = await groupApi.updateImage(imageNow.value, formData)
+        editGroup.image = image.fileName
+        const { id, ...values } = editGroup
+        await groupApi.updateGroup(editGroup.id, values)
+        editGroup.title = ''
+        editGroup.description = ''
+        editGroup.category = ''
+        editGroup.image = ''
+        editGroup.website = ''
+        editGroup.id = ''
+        imageNow.value = ''
+        toast.open({
+          message: 'Imagen modificada correctamente',
+          type: 'success'
+        })
+        router.push({ name: 'admin' })
+      } catch (error) {
+        console.log(error)
+        toast.open({
+          message: 'Hubo un error',
+          type: 'error'
+        })
+      }
+    }
+  }
+
   return {
     newGroup,
     groups,
@@ -123,6 +160,8 @@ export const useGroupStore = defineStore('group', () => {
     getGroup,
     getGroups,
     updateGroup,
-    errorInput
+    updateImage,
+    errorInput,
+    imageNow
   }
 })
