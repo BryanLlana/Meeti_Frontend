@@ -152,6 +152,25 @@ export const useGroupStore = defineStore('group', () => {
     }
   }
 
+  const deleteGroup = async () => {
+    try {
+      await groupApi.deleteGroup(editGroup.id)
+      editGroup.title = ''
+      editGroup.description = ''
+      editGroup.category = ''
+      editGroup.image = ''
+      editGroup.website = ''
+      editGroup.id = ''
+      toast.open({
+        message: 'Grupo eliminado correctamente',
+        type: 'success'
+      })
+      router.push({ name: 'admin' })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return {
     newGroup,
     groups,
@@ -161,6 +180,7 @@ export const useGroupStore = defineStore('group', () => {
     getGroups,
     updateGroup,
     updateImage,
+    deleteGroup,
     errorInput,
     imageNow
   }

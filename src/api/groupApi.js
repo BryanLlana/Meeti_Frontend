@@ -18,5 +18,8 @@ export const groupApi = {
   },
   updateImage: async (imageName, image) => {
     return await api.patch(`/files/group/${imageName}`, image)
+  },
+  deleteGroup: async (id) => {
+    return await api.delete(`/group/${id}`)
   }
 }

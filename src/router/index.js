@@ -33,6 +33,11 @@ const router = createRouter({
       path: '/editar-imagen-grupo/:id',
       name: 'edit-image-group',
       component: () => import('@/views/admin/group/EditImageView.vue')
+    },
+    {
+      path: '/eliminar-grupo/:id',
+      name: 'delete-group',
+      component: () => import('@/views/admin/group/DeleteGroupView.vue')
     }
   ]
 })

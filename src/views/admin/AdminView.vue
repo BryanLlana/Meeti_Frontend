@@ -54,7 +54,7 @@ onMounted(async () => {
             <div class="acciones contenedor-botones">
               <RouterLink :to="{ name: 'edit-group', params: { id: group.id } }" class="btn btn-verde">Editar</RouterLink>
               <RouterLink :to="{ name: 'edit-image-group', params: {id: group.id } }" class="btn btn-azul2">Imagen</RouterLink>
-              <RouterLink :to="{ name: 'admin' }" class="btn btn-rojo">Eliminar</RouterLink>
+              <RouterLink :to="{ name: 'delete-group', params: { id: group.id} }" class="btn btn-rojo">Eliminar</RouterLink>
             </div>
           </li>
         </ul>
