@@ -6,5 +6,8 @@ export const groupApi = {
   },
   createGroup: async data => {
     return await api.post('/group', data)
+  },
+  findGroups: async () => {
+    return await api.get('/group')
   }
 }

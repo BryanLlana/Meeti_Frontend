@@ -6,6 +6,8 @@ import { useRouter } from 'vue-router'
 export const useGroupStore = defineStore('group', () => {
   const toast = inject('toast')
   const router = useRouter()
+  const errorInput = ref({})
+
   const newGroup = reactive({
     title: '',
     description: '',
@@ -13,7 +15,16 @@ export const useGroupStore = defineStore('group', () => {
     image: '',
     category: ''
   })
-  const errorInput = ref({})
+  const groups = ref([])
+
+  const getGroups = async () => {
+    try {
+      const { data } = await groupApi.findGroups()
+      groups.value = data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const createGroup = async e => {
     errorInput.value = {}
@@ -50,7 +61,9 @@ export const useGroupStore = defineStore('group', () => {
 
   return {
     newGroup,
+    groups,
     createGroup,
+    getGroups,
     errorInput
   }
 })

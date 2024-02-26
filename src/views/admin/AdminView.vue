@@ -1,6 +1,14 @@
 <script setup>
 import MeetiLayout from '@/layout/MeetiLayout.vue';
 import { RouterLink } from 'vue-router';
+import { onMounted } from 'vue';
+import { useGroupStore } from '@/stores/group';
+
+const groupStore = useGroupStore()
+
+onMounted(async () => {
+  await groupStore.getGroups()
+})
 </script>
 
 <template>
@@ -36,13 +44,16 @@ import { RouterLink } from 'vue-router';
       <div class="seccion-admin">
         <h2>Tus Grupos</h2>
         <ul>
-          <li>
+          <li
+            v-for="group in groupStore.groups"
+            :key="group.id"
+          >
             <div class="informacion-admin">
-              <h3>E-Commerce</h3>
+              <h3>{{ group.title }}</h3>
             </div>
             <div class="acciones contenedor-botones">
               <RouterLink :to="{ name: 'admin' }" class="btn btn-verde">Editar</RouterLink>
-              <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Asistentes</RouterLink>
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Imagen</RouterLink>
               <RouterLink :to="{ name: 'admin' }" class="btn btn-rojo">Eliminar</RouterLink>
             </div>
           </li>
