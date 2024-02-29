@@ -15,6 +15,11 @@ export const useAuthStore = defineStore('auth', () => {
     password2: ''
   })
 
+  const loginUser = reactive({
+    email: '',
+    password: ''
+  })
+
   const register = async () => {
     inputError.value = {}
 
@@ -27,7 +32,6 @@ export const useAuthStore = defineStore('auth', () => {
       try {
         const { password2, image, ...values } = user
         const { data } = await authApi.register(values)
-        localStorage.setItem('authToken', data.token)
         Object.assign(user, {
           email: '',
           name: '',
@@ -39,12 +43,13 @@ export const useAuthStore = defineStore('auth', () => {
           message: 'Usuario registrado correctamente',
           type: 'success'
         })
+        router.push({ name: 'login' })
       } catch (error) {
         console.log(error)
         const err = error.response.data.message
         if (typeof err === 'object') {
           toast.open({
-            message: 'Password no seguro',
+            message: 'Password no seguro, debe tener una mayúscula y un número',
             type: 'error'
           })
         } else {
@@ -57,9 +62,35 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  const login = async () => {
+    inputError.value = {}
+
+    if (loginUser.email === '') inputError.value.email = 'El email es obligatorio'
+    if (loginUser.password === '') inputError.value.password = 'El password es obligatorio'
+
+    if (Object.values(inputError.value).length === 0) {
+      try {
+        const { data } = await authApi.login(loginUser)
+        localStorage.setItem('authToken', data.token)
+        Object.assign(loginUser, {
+          email: '',
+          password: ''
+        })
+      } catch (error) {
+        console.log(error)
+        toast.open({
+          message: error.response.data.message,
+          type: 'error'
+        })
+      }
+    }
+  }
+
   return {
-    user, 
+    user,
+    loginUser, 
     register,
+    login,
     inputError
   }
 })
