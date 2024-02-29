@@ -3,11 +3,14 @@ import MeetiLayout from '@/layout/MeetiLayout.vue';
 import { RouterLink } from 'vue-router';
 import { onMounted } from 'vue';
 import { useGroupStore } from '@/stores/group';
+import { useAuthStore } from '@/stores/auth';
 
 const groupStore = useGroupStore()
+const authStore = useAuthStore()
 
 onMounted(async () => {
   await groupStore.getGroups()
+  await authStore.getUserAuth()
 })
 </script>
 
@@ -43,7 +46,7 @@ onMounted(async () => {
 
       <div class="seccion-admin">
         <h2>Tus Grupos</h2>
-        <ul>
+        <ul v-if="groupStore.groups.length > 0">
           <li
             v-for="group in groupStore.groups"
             :key="group.id"
@@ -58,6 +61,7 @@ onMounted(async () => {
             </div>
           </li>
         </ul>
+        <p v-else>No hay grupos</p>
       </div>
     </main>
   </MeetiLayout>

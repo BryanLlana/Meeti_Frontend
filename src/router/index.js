@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { authApi } from '@/api/authApi'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,12 +23,14 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
-      component: () => import('@/views/admin/AdminView.vue')
+      component: () => import('@/views/admin/AdminView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/nuevo-grupo',
       name: 'new-group',
-      component: () => import('@/views/admin/group/NewGroupView.vue')
+      component: () => import('@/views/admin/group/NewGroupView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/editar-grupo/:id',
@@ -45,6 +48,21 @@ const router = createRouter({
       component: () => import('@/views/admin/group/DeleteGroupView.vue')
     }
   ]
+})
+
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.meta.requiresAuth
+  if (requiresAuth) {
+    try {
+      await authApi.private()
+      next()
+    } catch (error) {
+      console.log(error)
+      next({ name: 'login'})
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

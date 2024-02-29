@@ -7,6 +7,18 @@ export const useAuthStore = defineStore('auth', () => {
   const toast = inject('toast')
   const router = useRouter()
   const inputError = ref({})
+
+  const userAuth = ref({})
+
+  const getUserAuth = async () => {
+    try {
+      const { data } = await authApi.private()
+      userAuth.value = data.user
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const user = reactive({
     email: '',
     name: '',
@@ -88,6 +100,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user,
+    userAuth,
+    getUserAuth,
     loginUser, 
     register,
     login,
