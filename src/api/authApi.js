@@ -7,7 +7,7 @@ export const authApi = {
   login: async data => {
     return await api.post('auth/login', data)
   },
-  register: async () => {
+  private: async () => {
     return await api.get('/auth/private')
   }
 }
