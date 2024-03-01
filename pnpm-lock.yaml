@@ -5,9 +5,18 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@vue-leaflet/vue-leaflet':
+    specifier: ^0.10.1
+    version: 0.10.1(leaflet@1.9.4)
   axios:
     specifier: ^1.6.7
     version: 1.6.7
+  leaflet:
+    specifier: ^1.9.4
+    version: 1.9.4
+  leaflet-geosearch:
+    specifier: ^3.11.1
+    version: 3.11.1
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(vue@3.4.19)
@@ -261,6 +270,14 @@ packages:
     dev: true
     optional: true
 
+  /@googlemaps/js-api-loader@1.16.6:
+    resolution: {integrity: sha512-V8p5W9DbPQx74jWUmyYJOerhiB4C+MHekaO0ZRmc6lrOYrvY7+syLhzOWpp55kqSPeNb+qbC2h8i69aLIX6krQ==}
+    requiresBuild: true
+    dependencies:
+      fast-deep-equal: 3.1.3
+    dev: false
+    optional: true
+
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
 
@@ -382,6 +399,21 @@ packages:
       vite: 5.1.3
       vue: 3.4.19
     dev: true
+
+  /@vue-leaflet/vue-leaflet@0.10.1(leaflet@1.9.4):
+    resolution: {integrity: sha512-RNEDk8TbnwrJl8ujdbKgZRFygLCxd0aBcWLQ05q/pGv4+d0jamE3KXQgQBqGAteE1mbQsk3xoNcqqUgaIGfWVg==}
+    peerDependencies:
+      '@types/leaflet': ^1.5.7
+      leaflet: ^1.6.0
+    peerDependenciesMeta:
+      '@types/leaflet':
+        optional: true
+    dependencies:
+      leaflet: 1.9.4
+      vue: 3.4.19
+    transitivePeerDependencies:
+      - typescript
+    dev: false
 
   /@vue/compiler-core@3.4.19:
     resolution: {integrity: sha512-gj81785z0JNzRcU0Mq98E56e4ltO1yf8k5PQ+tV/7YHnbZkrM0fyFyuttnN8ngJZjbpofWE/m4qjKBiLl8Ju4w==}
@@ -518,6 +550,12 @@ packages:
   /estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
 
+  /fast-deep-equal@3.1.3:
+    resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /follow-redirects@1.15.5:
     resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
     engines: {node: '>=4.0'}
@@ -544,6 +582,17 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /leaflet-geosearch@3.11.1:
+    resolution: {integrity: sha512-cILLFLmn8C3MtGhaafGqY7CuhUG2+bGyUgfPHgNgW6fs4EvYyiIO88nO2ZqR7Hy6Ba089haLkhODpZR+/fRrPQ==}
+    optionalDependencies:
+      '@googlemaps/js-api-loader': 1.16.6
+      leaflet: 1.9.4
+    dev: false
+
+  /leaflet@1.9.4:
+    resolution: {integrity: sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==}
+    dev: false
 
   /magic-string@0.30.7:
     resolution: {integrity: sha512-8vBuFF/I/+OSLRmdf2wwFCJCz+nSn0m6DPvGH1fS/KiQoSaR+sETbov0eIk9KhEKy8CYqIkIAnbohxT/4H0kuA==}

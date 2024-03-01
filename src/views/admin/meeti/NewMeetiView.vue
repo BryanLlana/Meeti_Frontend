@@ -1,11 +1,15 @@
 <script setup>
 import MeetiLayout from '@/layout/MeetiLayout.vue';
 import { useAuthStore } from '@/stores/auth';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useGroupStore } from '@/stores/group';
+import useLocationMap from '@/composable/useLocationMap'
+import "leaflet/dist/leaflet.css";
+import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 
 const authStore = useAuthStore()
 const groupStore = useGroupStore()
+const { zoom, center, marker, lastName, lat, lon } = useLocationMap()
 
 onMounted(async () => {
   await authStore.getUserAuth()
@@ -23,11 +27,7 @@ onMounted(async () => {
           <label>Grupo</label>
           <select>
             <option value="" disabled selected>-- Selecciona Grupo --</option>
-            <option
-              v-for="group in groupStore.groups"
-              :key="group.id"
-              :value="group.id"
-            >{{ group.title }}</option>
+            <option v-for="group in groupStore.groups" :key="group.id" :value="group.id">{{ group.title }}</option>
           </select>
         </div>
         <div class="campo">
@@ -63,35 +63,26 @@ onMounted(async () => {
         <legend>Ubicación Meeti</legend>
         <div class="campo buscador">
           <label>Coloca la Dirección del Meeti</label>
-          <div class="contenedor-input">
-            <input type="text" id="formbuscador" placeholder="Ubicación">
-            <small>El asistente colocará una dirección estimada</small>
-          </div>
+          <input type="text" @input="marker">
+        </div>
+        <div style="height:600px; width:100%">
+          <LMap v-model:zoom="zoom" :center="center" :use-global-leaflet="false">
+            <LMarker :latLng="center"/>
+            <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"></LTileLayer>
+          </LMap>
         </div>
         <p class="informacion">Confirma que los siguientes campos sean correctos:</p>
         <div class="campo">
           <label>Dirección</label>
-          <input type="text" id="direccion" placeholder="Dirección">
-        </div>
-        <div class="campo">
-          <label>Ciudad</label>
-          <input type="text" id="ciudad" placeholder="Ciudad">
-        </div>
-        <div class="campo">
-          <label>Estado</label>
-          <input type="text" id="estado" placeholder="Estado">
-        </div>
-        <div class="campo">
-          <label>País</label>
-          <input type="text" id="pais" placeholder="País">
+          <input :value="lastName" type="text" id="direccion" placeholder="Dirección">
         </div>
         <div class="campo">
           <label>Latitud</label>
-          <input type="text" id="lat">
+          <input :value="lat" type="text" id="lat">
         </div>
         <div class="campo">
           <label>Longitud</label>
-          <input type="text" id="lng">
+          <input :value="lon" type="text" id="lng">
         </div>
         <div class="campo enviar">
           <input type="submit" class="btn btn-rosa" value="Crear Meeti">
