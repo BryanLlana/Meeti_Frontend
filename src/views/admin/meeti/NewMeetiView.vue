@@ -9,7 +9,7 @@ import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 
 const authStore = useAuthStore()
 const groupStore = useGroupStore()
-const { zoom, center, marker, lastName, lat, lon } = useLocationMap()
+const { zoom, center, marker, name, lastName, lat, lon } = useLocationMap()
 
 onMounted(async () => {
   await authStore.getUserAuth()
@@ -63,7 +63,10 @@ onMounted(async () => {
         <legend>Ubicación Meeti</legend>
         <div class="campo buscador">
           <label>Coloca la Dirección del Meeti</label>
-          <input type="text" @input="marker">
+          <div style="width: 100%;">
+            <input v-model="name" style="width: 100%;" type="text">
+            <button @click.prevent="marker" style="margin-top: 1rem; margin-left: 0;" class="cerrar-sesion">Buscar</button>
+          </div>
         </div>
         <div style="height:600px; width:100%">
           <LMap v-model:zoom="zoom" :center="center" :use-global-leaflet="false">

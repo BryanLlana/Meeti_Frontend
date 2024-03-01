@@ -4,6 +4,7 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch'
 const useLocationMap = () => {
   const zoom = ref(17)  
   const center = ref([-12.0431800, -77.0282400])
+  const name = ref('')
   const lastName = ref('')
   const lat = ref('')
   const lon = ref('')
@@ -13,10 +14,10 @@ const useLocationMap = () => {
     center.value = [marker.lat, marker.lng]
   } */
   
-  const marker = async e => {
-    if (e.target.value.length > 8) {
+  const marker = async () => {
+    if (name.value !== '') {
       const provider = new OpenStreetMapProvider()
-      const results = await provider.search({ query: e.target.value })
+      const results = await provider.search({ query: name.value })
       if (results.length > 0) {
         center.value = results[0].bounds[0]
         lastName.value = results[0].raw.display_name
@@ -30,6 +31,7 @@ const useLocationMap = () => {
     zoom,
     center,
     marker,
+    name,
     lastName,
     lat,
     lon
