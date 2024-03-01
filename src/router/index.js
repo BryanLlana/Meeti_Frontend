@@ -49,6 +49,12 @@ const router = createRouter({
       name: 'delete-group',
       component: () => import('@/views/admin/group/DeleteGroupView.vue'),
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/nuevo-meeti',
+      name: 'new-meeti',
+      component: () => import('@/views/admin/meeti/NewMeetiView.vue'),
+      meta: { requiresAuth: true }
     }
   ]
 })
