@@ -35,17 +35,20 @@ const router = createRouter({
     {
       path: '/editar-grupo/:id',
       name: 'edit-group',
-      component: () => import('@/views/admin/group/EditGroupView.vue')
+      component: () => import('@/views/admin/group/EditGroupView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/editar-imagen-grupo/:id',
       name: 'edit-image-group',
-      component: () => import('@/views/admin/group/EditImageView.vue')
+      component: () => import('@/views/admin/group/EditImageView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/eliminar-grupo/:id',
       name: 'delete-group',
-      component: () => import('@/views/admin/group/DeleteGroupView.vue')
+      component: () => import('@/views/admin/group/DeleteGroupView.vue'),
+      meta: { requiresAuth: true }
     }
   ]
 })

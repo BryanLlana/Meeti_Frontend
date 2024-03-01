@@ -3,12 +3,15 @@ import MeetiLayout from '@/layout/MeetiLayout.vue';
 import { useCategoryStore } from '@/stores/category'
 import { useGroupStore } from '@/stores/group'
 import { onMounted } from 'vue';
+import { useAuthStore } from '@/stores/auth';
 
 const categoryStore = useCategoryStore()
 const groupStore = useGroupStore()
+const authStore = useAuthStore()
 
 onMounted(async () => {
   await categoryStore.getCategories()
+  await authStore.getUserAuth()
 })
 
 const inputDescription = e => {
@@ -21,7 +24,7 @@ const readImage = e => {
 </script>
 
 <template>
-  <MeetiLayout>
+  <MeetiLayout :userAuth="authStore.userAuth" :logout="authStore.logout">
     <main class="contenedor contenedor-formularios no-padding">
       <h1>Crea un Nuevo Grupo</h1>
 

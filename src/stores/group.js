@@ -75,7 +75,7 @@ export const useGroupStore = defineStore('group', () => {
     errorInput.value = {}
     try {
       const { data } = await groupApi.findGroup(id)
-      const { category, ...values } = data
+      const { category, user, ...values } = data
       Object.assign(editGroup, {
         ...values,
         category: category.id

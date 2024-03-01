@@ -15,7 +15,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <MeetiLayout>
+  <MeetiLayout :userAuth="authStore.userAuth" :logout="authStore.logout">
     <main class="contenedor panel-administracion">
       <h1>Panel de Administración</h1>
 

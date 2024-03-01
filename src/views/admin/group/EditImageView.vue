@@ -3,13 +3,16 @@ import MeetiLayout from '@/layout/MeetiLayout.vue';
 import { useGroupStore } from '@/stores/group';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
 
 const route = useRoute()
 const groupStore = useGroupStore()
+const authStore = useAuthStore()
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 onMounted(async () => {
   await groupStore.getGroup(route.params.id)
+  await authStore.getUserAuth()
   groupStore.imageNow = groupStore.editGroup.image
 })
 
@@ -19,7 +22,7 @@ const readImage = e => {
 </script>
 
 <template>
-  <MeetiLayout>
+  <MeetiLayout :userAuth="authStore.userAuth" :logout="authStore.logout">
     <main class="contenedor contenedor-formularios no-padding">
       <h1>Editar Imagen del Grupo: {{ groupStore.editGroup.title }}</h1>
 

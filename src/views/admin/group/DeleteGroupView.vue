@@ -3,17 +3,20 @@ import MeetiLayout from '@/layout/MeetiLayout.vue';
 import { useGroupStore } from '@/stores/group';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
 
 const route = useRoute()
 const groupStore = useGroupStore()
+const authStore = useAuthStore()
 
 onMounted(async () => {
   await groupStore.getGroup(route.params.id)
+  await authStore.getUserAuth()
 })
 </script>
 
 <template>
-  <MeetiLayout>
+  <MeetiLayout :userAuth="authStore.userAuth" :logout="authStore.logout">
     <main class="contenedor contenedor-formularios no-padding">
       <h1>Eliminar Grupo: {{ groupStore.editGroup.title }}</h1>
 

@@ -4,14 +4,17 @@ import { useCategoryStore } from '@/stores/category'
 import { useGroupStore } from '@/stores/group'
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
 const groupStore = useGroupStore()
+const authStore = useAuthStore()
 
 onMounted(async () => {
   await groupStore.getGroup(route.params.id)
   await categoryStore.getCategories()
+  await authStore.getUserAuth()
 })
 
 const inputDescription = e => {
@@ -20,7 +23,7 @@ const inputDescription = e => {
 </script>
 
 <template>
-  <MeetiLayout>
+  <MeetiLayout :userAuth="authStore.userAuth" :logout="authStore.logout">
     <main class="contenedor contenedor-formularios no-padding">
       <h1>Editar Grupo: {{ groupStore.editGroup.title }}</h1>
 

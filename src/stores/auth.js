@@ -88,6 +88,7 @@ export const useAuthStore = defineStore('auth', () => {
           email: '',
           password: ''
         })
+        router.push({ name: 'admin' })
       } catch (error) {
         console.log(error)
         toast.open({
@@ -98,11 +99,19 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  const logout = () => {
+    localStorage.removeItem('authToken')
+    userAuth.value = {}
+    inputError.value = {}
+    router.push({ name: 'login' })
+  }
+
   return {
     user,
     userAuth,
     getUserAuth,
     loginUser, 
+    logout,
     register,
     login,
     inputError
