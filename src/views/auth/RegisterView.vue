@@ -5,7 +5,7 @@ const authStore = useAuthStore()
 </script>
 
 <template>
-  <MeetiLayout>
+  <MeetiLayout :userAuth="authStore.userAuth" :logout="authStore.logout">
     <main class="contenedor contenedor-formularios">
       <h1>Crear Cuenta</h1>
       <form @submit.prevent="authStore.register" class="default-form">
