@@ -107,7 +107,7 @@ const inputDescription = e => {
           <input :value="lon" type="text" id="lng">
         </div>
         <div class="campo enviar">
-          <input type="submit" class="btn btn-rosa" value="Crear Meeti">
+          <input type="submit" class="btn btn-rosa" value="Guardar Cambios">
         </div>
       </form>
     </main>

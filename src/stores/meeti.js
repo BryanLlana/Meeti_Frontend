@@ -47,7 +47,7 @@ export const useMeetiStore = defineStore('meeti', () => {
     if (!newMeeti.speaker) errorInput.value.speaker = 'El invitado es obligatorio'
     if (!newMeeti.date || !newMeeti.hour) errorInput.value.date = 'El día y la hora son obligatorios'
     if (!newMeeti.address) errorInput.value.address = 'La dirección es obligatoria'
-    if (!newMeeti.description) errorInput.value.description = 'La descripción es obligatoria'
+    if (!newMeeti.description || editMeeti.description === '<br>') errorInput.value.description = 'La descripción es obligatoria'
 
     if (Object.values(errorInput.value).length === 0) {
       try {
@@ -77,7 +77,44 @@ export const useMeetiStore = defineStore('meeti', () => {
   }
 
   const updateMeeti = async (lastname, lat, lon) => {
-    console.log(lastname)
+    errorInput.value = {}
+    editMeeti.address = lastname
+    editMeeti.lat = lat
+    editMeeti.lon = lon
+    if (!editMeeti.group) errorInput.value.group = 'El grupo es obligatorio'
+    if (!editMeeti.title) errorInput.value.title = 'El título es obligatorio'
+    if (!editMeeti.speaker) errorInput.value.speaker = 'El invitado es obligatorio'
+    if (!editMeeti.date || !editMeeti.hour) errorInput.value.date = 'El día y la hora son obligatorios'
+    if (!editMeeti.address) errorInput.value.address = 'La dirección es obligatoria'
+    if (!editMeeti.description || editMeeti.description === '<br>') errorInput.value.description = 'La descripción es obligatoria'
+
+    if (Object.values(errorInput.value).length === 0) {
+      try {
+        editMeeti.quota = editMeeti.quota === '' ? 0 : parseInt(editMeeti.quota)
+        const { id, ...values } = editMeeti
+        await meetiApi.updateMeeti(editMeeti.id, values)
+        Object.assign(editMeeti, {
+          id: '',
+          title: '',
+          speaker: '',
+          quota: '',
+          description: '',
+          date: '',
+          hour: '',
+          address: '',
+          lat: '',
+          lon: '',
+          group: '' 
+        })
+        toast.open({
+          message: 'Meeti modificado correctamente',
+          type: 'success'
+        })
+        router.push({ name: 'admin' })
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
   const getMeeti = async id => {

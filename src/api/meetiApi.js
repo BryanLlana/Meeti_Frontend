@@ -9,5 +9,8 @@ export const meetiApi = {
   },
   getMeeti: async id => {
     return await api.get(`/meeti/${id}`)
+  },
+  updateMeeti: async (id, data) => {
+    return await api.patch(`/meeti/${id}`, data)
   }
 } 
