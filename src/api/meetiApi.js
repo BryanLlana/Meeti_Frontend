@@ -6,5 +6,8 @@ export const meetiApi = {
   },
   getMeetis: async () => {
     return await api.get('/meeti')
+  },
+  getMeeti: async id => {
+    return await api.get(`/meeti/${id}`)
   }
 } 

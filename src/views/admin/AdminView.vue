@@ -43,7 +43,7 @@ onMounted(async () => {
               <small>{{ meeti.users.length }} Asistentes</small>
             </div>
             <div class="acciones contenedor-botones">
-              <RouterLink :to="{ name: 'admin' }" class="btn btn-verde">Editar</RouterLink>
+              <RouterLink :to="{ name: 'edit-meeti', params: { id: meeti.id } }" class="btn btn-verde">Editar</RouterLink>
               <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Asistentes</RouterLink>
               <RouterLink :to="{ name: 'admin' }" class="btn btn-rojo">Eliminar</RouterLink>
             </div>
@@ -85,7 +85,7 @@ onMounted(async () => {
               <small>{{ meeti.users.length }} Asistentes</small>
             </div>
             <div class="acciones contenedor-botones">
-              <RouterLink :to="{ name: 'admin' }" class="btn btn-verde">Editar</RouterLink>
+              <RouterLink :to="{ name: 'edit-meeti', params: { id: meeti.id } }" class="btn btn-verde">Editar</RouterLink>
               <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Asistentes</RouterLink>
               <RouterLink :to="{ name: 'admin' }" class="btn btn-rojo">Eliminar</RouterLink>
             </div>

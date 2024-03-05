@@ -20,6 +20,20 @@ export const useMeetiStore = defineStore('meeti', () => {
     group: '' 
   })
 
+  const editMeeti = reactive({
+    id: '',
+    title: '',
+    speaker: '',
+    quota: '',
+    description: '',
+    date: '',
+    hour: '',
+    address: '',
+    lat: '',
+    lon: '',
+    group: '' 
+  })
+
   const meetisNext = ref([])
   const meetisPrevious = ref([])
 
@@ -62,6 +76,31 @@ export const useMeetiStore = defineStore('meeti', () => {
     }
   }
 
+  const updateMeeti = async (lastname, lat, lon) => {
+    console.log(lastname)
+  }
+
+  const getMeeti = async id => {
+    errorInput.value = {}
+    try {
+      const { data } = await meetiApi.getMeeti(id)
+      let { group, user, users, quota, ...values } = data
+      quota = quota === 0 ? '' : quota
+      Object.assign(editMeeti, {
+        ...values,
+        quota,
+        group: group.id
+      })
+    } catch (error) {
+      console.log(error)
+      toast.open({
+        message: error.response.data.message,
+        type: 'error'
+      })
+      router.push({ name: 'admin' })
+    }
+  }
+
   const getMeetis = async () => {
     try {
       const { data } = await meetiApi.getMeetis()
@@ -74,9 +113,12 @@ export const useMeetiStore = defineStore('meeti', () => {
 
   return {
     newMeeti,
+    editMeeti,
     meetisNext,
     meetisPrevious,
     createMeeti,
+    updateMeeti,
+    getMeeti,
     getMeetis,
     errorInput
   }
