@@ -4,13 +4,17 @@ import { RouterLink } from 'vue-router';
 import { onMounted } from 'vue';
 import { useGroupStore } from '@/stores/group';
 import { useAuthStore } from '@/stores/auth';
+import { useMeetiStore } from '@/stores/meeti';
+import { formatDate } from '@/helpers';
 
 const groupStore = useGroupStore()
 const authStore = useAuthStore()
+const meetiStore = useMeetiStore()
 
 onMounted(async () => {
   await groupStore.getGroups()
   await authStore.getUserAuth()
+  await meetiStore.getMeetis()
 })
 </script>
 
@@ -27,13 +31,16 @@ onMounted(async () => {
       </div>
 
       <div class="seccion-admin">
-        <h2>Tus Meetis</h2>
-        <ul>
-          <li>
+        <h2>Próximos Meetis</h2>
+        <ul v-if="meetiStore.meetisNext.length > 0">
+          <li
+            v-for="meeti in meetiStore.meetisNext"
+            :key="meeti.id"
+          >
             <div class="informacion-admin">
-              <p class="fecha">Lunes, 22 de Mayo 2024</p>
-              <h3>E-Commerce</h3>
-              <small>23 Asistentes</small>
+              <p class="fecha">{{ formatDate(meeti.date) }} | Horas: {{ meeti.hour.substring(0, 5) }}</p>
+              <h3>{{ meeti.title }}</h3>
+              <small>{{ meeti.users.length }} Asistentes</small>
             </div>
             <div class="acciones contenedor-botones">
               <RouterLink :to="{ name: 'admin' }" class="btn btn-verde">Editar</RouterLink>
@@ -42,6 +49,7 @@ onMounted(async () => {
             </div>
           </li>
         </ul>
+        <p v-else>No hay meetis próximos</p>
       </div>
 
       <div class="seccion-admin">
@@ -62,6 +70,28 @@ onMounted(async () => {
           </li>
         </ul>
         <p v-else>No hay grupos</p>
+      </div>
+
+      <div class="seccion-admin">
+        <h2>Meetis Anteriores</h2>
+        <ul v-if="meetiStore.meetisPrevious.length > 0">
+          <li
+            v-for="meeti in meetiStore.meetisPrevious"
+            :key="meeti.id"
+          >
+            <div class="informacion-admin">
+              <p class="fecha">{{ formatDate(meeti.date) }} | Horas: {{ meeti.hour.substring(0, 5) }}</p>
+              <h3>{{ meeti.title }}</h3>
+              <small>{{ meeti.users.length }} Asistentes</small>
+            </div>
+            <div class="acciones contenedor-botones">
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-verde">Editar</RouterLink>
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Asistentes</RouterLink>
+              <RouterLink :to="{ name: 'admin' }" class="btn btn-rojo">Eliminar</RouterLink>
+            </div>
+          </li>
+        </ul>
+        <p v-else>No hay meetis anteriores</p>
       </div>
     </main>
   </MeetiLayout>

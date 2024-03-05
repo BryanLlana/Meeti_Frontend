@@ -20,6 +20,9 @@ export const useMeetiStore = defineStore('meeti', () => {
     group: '' 
   })
 
+  const meetisNext = ref([])
+  const meetisPrevious = ref([])
+
   const createMeeti = async (lastname, lat, lon) => {
     errorInput.value = {}
     newMeeti.address = lastname
@@ -59,9 +62,22 @@ export const useMeetiStore = defineStore('meeti', () => {
     }
   }
 
+  const getMeetis = async () => {
+    try {
+      const { data } = await meetiApi.getMeetis()
+      meetisNext.value = data.meetisNext
+      meetisPrevious.value = data.meetisPrevious
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return {
     newMeeti,
+    meetisNext,
+    meetisPrevious,
     createMeeti,
+    getMeetis,
     errorInput
   }
 })
