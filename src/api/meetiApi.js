@@ -12,5 +12,8 @@ export const meetiApi = {
   },
   updateMeeti: async (id, data) => {
     return await api.patch(`/meeti/${id}`, data)
+  },
+  deleteMeeti: async id => {
+    return await api.delete(`/meeti/${id}`)
   }
 } 

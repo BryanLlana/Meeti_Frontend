@@ -148,6 +148,33 @@ export const useMeetiStore = defineStore('meeti', () => {
     }
   }
 
+  const deleteMeeti = async () => {
+    try {
+      const { data } = await meetiApi.deleteMeeti(editMeeti.id)
+      console.log(data)
+      Object.assign(editMeeti, {
+        id: '',
+        title: '',
+        speaker: '',
+        quota: '',
+        description: '',
+        date: '',
+        hour: '',
+        address: '',
+        lat: '',
+        lon: '',
+        group: '' 
+      })
+      toast.open({
+        message: 'Meeti eliminado correctamente',
+        type: 'success'
+      })
+      router.push({ name: 'admin' })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return {
     newMeeti,
     editMeeti,
@@ -155,6 +182,7 @@ export const useMeetiStore = defineStore('meeti', () => {
     meetisPrevious,
     createMeeti,
     updateMeeti,
+    deleteMeeti,
     getMeeti,
     getMeetis,
     errorInput

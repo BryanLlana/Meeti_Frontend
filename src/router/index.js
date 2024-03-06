@@ -61,6 +61,12 @@ const router = createRouter({
       name: 'edit-meeti',
       component: () => import('@/views/admin/meeti/EditMeetiView.vue'),
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/delete-meeti/:id',
+      name: 'delete-meeti',
+      component: () => import('@/views/admin/meeti/DeleteMeetiView.vue'),
+      meta: { requiresAuth: true }
     }
   ]
 })
