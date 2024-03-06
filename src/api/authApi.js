@@ -9,5 +9,8 @@ export const authApi = {
   },
   private: async () => {
     return await api.get('/auth/private')
+  },
+  updateUser: async data => {
+    return await api.post('/auth/edit-profile', data)
   }
 }

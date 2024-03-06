@@ -9,16 +9,6 @@ export const useAuthStore = defineStore('auth', () => {
   const inputError = ref({})
 
   const userAuth = ref({})
-
-  const getUserAuth = async () => {
-    try {
-      const { data } = await authApi.private()
-      userAuth.value = data.user
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   const user = reactive({
     email: '',
     name: '',
@@ -31,6 +21,24 @@ export const useAuthStore = defineStore('auth', () => {
     email: '',
     password: ''
   })
+
+  const profile = reactive({
+    name: '',
+    description: '',
+    email: ''
+  })
+
+  const getUserAuth = async () => {
+    try {
+      const { data } = await authApi.private()
+      userAuth.value = data.user
+      profile.name = data.user.name
+      profile.email = data.user.email
+      profile.description = data.user.description
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const register = async () => {
     inputError.value = {}
@@ -106,12 +114,38 @@ export const useAuthStore = defineStore('auth', () => {
     router.push({ name: 'login' })
   }
 
+  const editProfile = async () => {
+    inputError.value = {}
+    if (profile.email === '') inputError.value.email = 'El email es obligatorio'
+    if (profile.name === '') inputError.value.name = 'El nombre es obligatorio'
+
+    if (Object.values(inputError.value).length === 0) {
+      try {
+        await authApi.updateUser(profile)
+        Object.assign(profile, {
+          name: '',
+          description: '',
+          email: ''
+        })
+        toast.open({
+          message: 'Perfil editado correctamente',
+          type: 'success'
+        })
+        router.push({ name: 'admin' })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
   return {
     user,
+    profile,
     userAuth,
     getUserAuth,
     loginUser, 
     logout,
+    editProfile,
     register,
     login,
     inputError

@@ -30,6 +30,7 @@ export const useGroupStore = defineStore('group', () => {
   const groups = ref([])
 
   const getGroups = async () => {
+    groups.value = []
     try {
       const { data } = await groupApi.findGroups()
       groups.value = data

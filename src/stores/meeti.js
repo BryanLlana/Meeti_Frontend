@@ -139,6 +139,8 @@ export const useMeetiStore = defineStore('meeti', () => {
   }
 
   const getMeetis = async () => {
+    meetisNext.value = []
+    meetisPrevious.value = []
     try {
       const { data } = await meetiApi.getMeetis()
       meetisNext.value = data.meetisNext
