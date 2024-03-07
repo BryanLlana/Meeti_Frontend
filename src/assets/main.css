@@ -188,14 +188,27 @@ p {
       justify-content: space-between;
   }
 }
+
+nav.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (width >= 768px){
+  nav.nav{
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
 nav.nav a {
-  padding: 1rem;
   display: inline-block;
 }
-nav.nav a:first-child {
+nav.nav a:nth-child(2) {
   color: #B8336A;
   font-weight: 700;
-  border-right: 1px solid #E6E6E6;
 }
 
 /** hero **/
@@ -657,7 +670,12 @@ aside img {
   color: white;
   font-size: 1rem;
   border-radius: .2rem;
-  margin-left: 1rem;
   padding: .4rem .8rem;
   cursor: pointer;
+}
+
+.profile {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
