@@ -79,6 +79,11 @@ const router = createRouter({
       name: 'edit-image-profile',
       component: () => import('@/views/admin/EditImageProfile.vue'),
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/meeti/:id',
+      name: 'meeti',
+      component: () => import('@/views/MeetiView.vue')
     }
   ]
 })

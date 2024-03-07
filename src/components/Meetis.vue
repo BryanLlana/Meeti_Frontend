@@ -2,6 +2,7 @@
 import { useMeetiStore } from '@/stores/meeti';
 import { onMounted } from 'vue';
 import { formatDate } from '@/helpers';
+import { RouterLink } from 'vue-router';
 
 const meetiStore = useMeetiStore()
 onMounted(async () => {
@@ -19,9 +20,9 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
         <img v-if="meeti.group.image" :src="`${BACKEND_URL}/files/group/${meeti.group.image}`" alt="">
         <div class="card-texto">
           <p class="fecha">{{ formatDate(meeti.date) }} | Horas: {{ meeti.hour.substring(0, 5) }}</p>
-          <a href="#">
+          <RouterLink :to="{ name: 'meeti', params: { id: meeti.id }}">
             <h3>{{ meeti.title }}</h3>
-          </a>
+          </RouterLink>
           <div class="info-autor">
             <img v-if="meeti.user.image" :src="`${BACKEND_URL}/files/profile/${meeti.user.image}`" alt="Image user" class="imagen">
             <div v-else class="imagen"></div>
