@@ -213,23 +213,34 @@ nav.nav a:nth-child(2) {
 
 /** hero **/
 .hero {
-  height: 38rem;
-  background-image: url(../img/hero.jpg);
+  margin-top: 2rem;
+  background-image: url(/img/hero.jpg);
   background-size: cover;
   background-position: center center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
+
 .hero h1 {
-  max-width:800px;
+  font-size: 2rem;
+}
+
+@media (width >= 768px){
+  .hero {
+    height: 38rem;
+  }
+}
+
+.hero h1 {
+  width: 100%;
   color: white;
 }
 
 /** Buscador Inicio **/
 .buscador-inicio {
+  margin-top: 1rem;
   padding:3rem 0;
   background-color: #F2F2F2;
 }
@@ -470,6 +481,7 @@ trix-toolbar .trix-button--icon-strike {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  max-width: 95%
 }
 .contenedor-botones a {
   margin-bottom: 1rem;

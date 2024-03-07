@@ -49,7 +49,7 @@ onMounted(async () => {
             </div>
           </li>
         </ul>
-        <p v-else>No hay meetis próximos</p>
+        <p style="margin: 0 auto; max-width: 95%;" v-else>No hay meetis próximos</p>
       </div>
 
       <div class="seccion-admin">
@@ -69,7 +69,7 @@ onMounted(async () => {
             </div>
           </li>
         </ul>
-        <p v-else>No hay grupos</p>
+        <p style="margin: 0 auto; max-width: 95%;" v-else>No hay grupos</p>
       </div>
 
       <div class="seccion-admin">
@@ -91,7 +91,7 @@ onMounted(async () => {
             </div>
           </li>
         </ul>
-        <p v-else>No hay meetis anteriores</p>
+        <p style="margin: 0 auto; max-width: 95%;" v-else>No hay meetis anteriores</p>
       </div>
     </main>
   </MeetiLayout>
