@@ -71,7 +71,14 @@ const router = createRouter({
     {
       path: '/editar-perfil',
       name: 'edit-profile',
-      component: () => import('@/views/admin/EditProfileView.vue')
+      component: () => import('@/views/admin/EditProfileView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/editar-imagen-perfil',
+      name: 'edit-image-profile',
+      component: () => import('@/views/admin/EditImageProfile.vue'),
+      meta: { requiresAuth: true }
     }
   ]
 })

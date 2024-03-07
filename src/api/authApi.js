@@ -12,5 +12,11 @@ export const authApi = {
   },
   updateUser: async data => {
     return await api.post('/auth/edit-profile', data)
+  },
+  uploadImage: async image => {
+    return await api.post('/files/profile', image)
+  },
+  updateImage: async (imageName, image) => {
+    return await api.patch(`/files/profile/${imageName}`, image)
   }
 }

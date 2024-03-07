@@ -27,7 +27,7 @@ onMounted(async () => {
         <RouterLink :to="{ name: 'new-group' }" class="btn btn-amarillo">Nuevo Grupo</RouterLink>
         <RouterLink :to="{ name: 'new-meeti' }" class="btn btn-azul">Nuevo Meeti</RouterLink>
         <RouterLink :to="{ name: 'edit-profile' }" class="btn btn-rosa">Editar Perfil</RouterLink>
-        <RouterLink :to="{ name: 'admin' }" class="btn btn-amarillo">Imagen Perfil</RouterLink>
+        <RouterLink :to="{ name: 'edit-image-profile' }" class="btn btn-amarillo">Imagen Perfil</RouterLink>
       </div>
 
       <div class="seccion-admin">

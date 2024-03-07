@@ -25,8 +25,11 @@ export const useAuthStore = defineStore('auth', () => {
   const profile = reactive({
     name: '',
     description: '',
-    email: ''
+    email: '',
+    image: ''
   })
+
+  const imageNow = ref('')
 
   const getUserAuth = async () => {
     try {
@@ -35,6 +38,7 @@ export const useAuthStore = defineStore('auth', () => {
       profile.name = data.user.name
       profile.email = data.user.email
       profile.description = data.user.description
+      profile.image = data.user.image
     } catch (error) {
       console.log(error)
     }
@@ -138,6 +142,39 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  const saveImage = async () => {
+    inputError.value = {}
+    if (typeof profile.image === 'string' || profile.image === null) inputError.value.image = 'La imagen es obligatoria'
+
+    if (Object.values(inputError.value).length === 0) {
+      const formData = new FormData()
+      formData.append('image', profile.image)
+
+      try {
+        if (!imageNow.value) {
+          const { data: image } = await authApi.uploadImage(formData)
+          profile.image = image.fileName
+        } else {
+          const { data: image } = await authApi.updateImage(imageNow.value, formData)
+          profile.image = image.fileName
+        }
+        await authApi.updateUser(profile)
+        imageNow.value = ''
+        toast.open({
+          message: 'Imagen modificada correctamente',
+          type: 'success'
+        })
+        router.push({ name: 'admin' })
+      } catch (error) {
+        console.log(error)
+        toast.open({
+          message: 'Hubo un error',
+          type: 'error'
+        })
+      }
+    }
+  }
+
   return {
     user,
     profile,
@@ -146,8 +183,10 @@ export const useAuthStore = defineStore('auth', () => {
     loginUser, 
     logout,
     editProfile,
+    saveImage,
     register,
     login,
-    inputError
+    inputError,
+    imageNow
   }
 })
