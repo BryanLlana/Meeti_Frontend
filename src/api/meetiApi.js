@@ -15,5 +15,8 @@ export const meetiApi = {
   },
   deleteMeeti: async id => {
     return await api.delete(`/meeti/${id}`)
+  },
+  getAllMeetis: async () => {
+    return await api.get('/meeti?option=true')
   }
 } 

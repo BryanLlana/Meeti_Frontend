@@ -36,6 +36,7 @@ export const useMeetiStore = defineStore('meeti', () => {
 
   const meetisNext = ref([])
   const meetisPrevious = ref([])
+  const meetisAll = ref([])
 
   const createMeeti = async (lastname, lat, lon) => {
     errorInput.value = {}
@@ -150,6 +151,16 @@ export const useMeetiStore = defineStore('meeti', () => {
     }
   }
 
+  const getAllMeetis = async () => {
+    meetisAll.value = []
+    try {
+      const { data } = await meetiApi.getAllMeetis()
+      meetisAll.value = data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const deleteMeeti = async () => {
     try {
       const { data } = await meetiApi.deleteMeeti(editMeeti.id)
@@ -187,6 +198,8 @@ export const useMeetiStore = defineStore('meeti', () => {
     deleteMeeti,
     getMeeti,
     getMeetis,
+    getAllMeetis,
+    meetisAll,
     errorInput
   }
 })
