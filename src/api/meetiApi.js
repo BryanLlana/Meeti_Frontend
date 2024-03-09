@@ -16,7 +16,10 @@ export const meetiApi = {
   deleteMeeti: async id => {
     return await api.delete(`/meeti/${id}`)
   },
-  getAllMeetis: async () => {
-    return await api.get('/meeti?option=true')
+  getAllMeetis: async (limit = 0) => {
+    return await api.get(`/meeti/public?limit=${limit}`)
+  },
+  getAllMeeti: async id => {
+    return await api.get(`/meeti/${id}?option=true`)
   }
 } 

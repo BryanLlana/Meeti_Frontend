@@ -636,6 +636,7 @@ trix-toolbar .trix-button--icon-strike {
   padding: 2rem;
   border: 1px solid #C7C7C7;
   background-color: white;
+  width: 100%;
 }
 .comentario .texto p {
   margin: 0;
@@ -659,11 +660,11 @@ trix-toolbar .trix-button--icon-strike {
 }
 
 aside .fecha {
-  background-image: url(../img/icono-hora.svg);
+  background-image: url(/img/icono-hora.svg);
   margin-bottom: 2rem;
 }
 aside .ubicacion {
-  background-image: url(../img/icono-ubicacion.svg);
+  background-image: url(/img/icono-ubicacion.svg);
 }
 aside img {
   display: block;

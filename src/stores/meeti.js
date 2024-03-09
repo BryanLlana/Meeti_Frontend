@@ -37,6 +37,7 @@ export const useMeetiStore = defineStore('meeti', () => {
   const meetisNext = ref([])
   const meetisPrevious = ref([])
   const meetisAll = ref([])
+  const meetiAll = ref({})
 
   const createMeeti = async (lastname, lat, lon) => {
     errorInput.value = {}
@@ -154,10 +155,23 @@ export const useMeetiStore = defineStore('meeti', () => {
   const getAllMeetis = async () => {
     meetisAll.value = []
     try {
-      const { data } = await meetiApi.getAllMeetis()
+      const { data } = await meetiApi.getAllMeetis(3)
       meetisAll.value = data
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const getAllMeeti = async id => {
+    try {
+      const { data } = await meetiApi.getAllMeeti(id)
+      meetiAll.value = data
+    } catch (error) {
+      toast.open({
+        message: error.response.data.message,
+        type: 'error'
+      })
+      router.push({ name: 'admin' })
     }
   }
 
@@ -199,7 +213,9 @@ export const useMeetiStore = defineStore('meeti', () => {
     getMeeti,
     getMeetis,
     getAllMeetis,
+    getAllMeeti,
     meetisAll,
+    meetiAll,
     errorInput
   }
 })
