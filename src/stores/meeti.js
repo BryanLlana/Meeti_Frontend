@@ -171,7 +171,7 @@ export const useMeetiStore = defineStore('meeti', () => {
         message: error.response.data.message,
         type: 'error'
       })
-      router.push({ name: 'admin' })
+      router.push({ name: 'home' })
     }
   }
 

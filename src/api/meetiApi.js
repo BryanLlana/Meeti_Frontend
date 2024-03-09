@@ -20,6 +20,6 @@ export const meetiApi = {
     return await api.get(`/meeti/public?limit=${limit}`)
   },
   getAllMeeti: async id => {
-    return await api.get(`/meeti/${id}?option=true`)
+    return await api.get(`/meeti/public/${id}`)
   }
 } 

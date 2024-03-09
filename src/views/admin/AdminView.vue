@@ -39,7 +39,7 @@ onMounted(async () => {
           >
             <div class="informacion-admin">
               <p class="fecha">{{ formatDate(meeti.date) }} | Horas: {{ meeti.hour.substring(0, 5) }}</p>
-              <h3>{{ meeti.title }}</h3>
+              <RouterLink :to="{name: 'meeti', params: { id: meeti.id }}"><h3>{{ meeti.title }}</h3></RouterLink>
               <small>{{ meeti.users.length }} Asistentes</small>
             </div>
             <div class="acciones contenedor-botones">
@@ -81,7 +81,7 @@ onMounted(async () => {
           >
             <div class="informacion-admin">
               <p class="fecha">{{ formatDate(meeti.date) }} | Horas: {{ meeti.hour.substring(0, 5) }}</p>
-              <h3>{{ meeti.title }}</h3>
+              <RouterLink :to="{name: 'meeti', params: { id: meeti.id }}"><h3>{{ meeti.title }}</h3></RouterLink>
               <small>{{ meeti.users.length }} Asistentes</small>
             </div>
             <div class="acciones contenedor-botones">
