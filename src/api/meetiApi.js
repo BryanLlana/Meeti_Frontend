@@ -4,6 +4,9 @@ export const meetiApi = {
   createMeeti: async data => {
     return await api.post('/meeti', data)
   },
+  registerUserMeeti: async id => {
+    return await api.post(`/meeti/confirmar-asistencia/${id}`)
+  },
   getMeetis: async () => {
     return await api.get('/meeti')
   },

@@ -202,6 +202,15 @@ export const useMeetiStore = defineStore('meeti', () => {
     }
   }
 
+  const confirmAssistance = async id => {
+    try {
+      await meetiApi.registerUserMeeti(id)
+      router.push({ name: 'meeti', params: { id }})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return {
     newMeeti,
     editMeeti,
@@ -214,6 +223,7 @@ export const useMeetiStore = defineStore('meeti', () => {
     getMeetis,
     getAllMeetis,
     getAllMeeti,
+    confirmAssistance,
     meetisAll,
     meetiAll,
     errorInput

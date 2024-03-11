@@ -1,7 +1,7 @@
 <script setup>
 import MeetiLayout from '@/layout/MeetiLayout.vue';
 import { useAuthStore } from '@/stores/auth';
-import { onMounted } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import { useMeetiStore } from '@/stores/meeti';
 import { useRoute } from 'vue-router';
 import { formatDate } from '@/helpers';
@@ -9,11 +9,27 @@ import { formatDate } from '@/helpers';
 const authStore = useAuthStore()
 const meetiStore = useMeetiStore()
 const route = useRoute()
+const button = ref(false)
+const assistanceQuantity = ref(0)
 
 onMounted(async () => {
   await authStore.getUserAuth()
   await meetiStore.getAllMeeti(route.params.id)
+  button.value = meetiStore.meetiAll?.users?.some(user => user.id === authStore.userAuth.id)
+  assistanceQuantity.value = meetiStore.meetiAll.users.length
 })
+
+const register = async () => {
+  button.value = !button.value
+  if (button.value) {
+    assistanceQuantity.value = ++assistanceQuantity.value
+    console.log(assistanceQuantity.value)
+  } else {
+    assistanceQuantity.value = --assistanceQuantity.value
+    console.log(assistanceQuantity.value)
+  }
+  await meetiStore.confirmAssistance(meetiStore?.meetiAll?.id)
+}
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 </script>
@@ -41,9 +57,18 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
         </div>
         
         <div v-if="authStore.userAuth.id" class="pregunta-asistencia">
-          <p>¿Asistirás?</p>
-          <a href="#" class="btn btn-azul">Si</a>
+          <div>
+            <p>{{ button ? 'Ya estás registrado' : '¿Asistirás?' }}</p>
+            <button
+              @click="register"
+              class="assist"
+              :class="`${button ? 'red' : 'aqua'}`"
+              type="submit"
+            >{{button ? 'Cancelar' : 'SI'}}
+            </button>
+          </div>
         </div>
+        <p v-else>Iniciar Sesión para confirmar tu asistencia</p>
       </div>
     </div>
 
@@ -56,7 +81,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
           </div>
           <div class="asistentes">
             <div class="titulo">
-              <h3>{{meetiStore.meetiAll?.users?.length}} Asistentes</h3>
+              <h3>{{assistanceQuantity}} Asistentes</h3>
               <a href="#">Ver todos</a>
             </div>
           </div>
