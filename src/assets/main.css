@@ -735,3 +735,31 @@ aside img {
   align-items: center;
   padding: .5rem 0 .5rem 0;
 }
+
+.usuario-perfil {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (width >= 768px){
+  .usuario-perfil {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.usuario-perfil .image {
+  width: 500px;
+  height: 600px;
+  margin: 0 auto;
+}
+
+.lista-grupos  {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (width >= 768px){
+  .lista-grupos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

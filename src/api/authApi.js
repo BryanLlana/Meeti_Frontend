@@ -18,5 +18,8 @@ export const authApi = {
   },
   updateImage: async (imageName, image) => {
     return await api.patch(`/files/profile/${imageName}`, image)
+  },
+  getUser: async id => {
+    return await api.get(`/auth/user/${id}`)
   }
 }

@@ -30,6 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
   })
 
   const imageNow = ref('')
+  const userOne = ref({})
 
   const getUserAuth = async () => {
     try {
@@ -41,6 +42,16 @@ export const useAuthStore = defineStore('auth', () => {
       profile.image = data.user.image
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const getUser = async id => {
+    try {
+      const {data} = await authApi.getUser(id)
+      userOne.value = data
+    } catch (error) {
+      console.log(error)
+      router.push({ name: 'admin'})
     }
   }
 
@@ -180,6 +191,8 @@ export const useAuthStore = defineStore('auth', () => {
     profile,
     userAuth,
     getUserAuth,
+    getUser,
+    userOne,
     loginUser, 
     logout,
     editProfile,

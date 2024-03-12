@@ -51,8 +51,8 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
             <div class="informacion">
               <p>Organizado por:</p>
               <p class="autor">
-                <a href="">{{ meetiStore.meetiAll?.user?.name }}</a> Creador de:
-                <a href="">{{ meetiStore.meetiAll?.group?.title }}</a>
+                <RouterLink :to="{ name: 'user', params: { id: meetiStore.meetiAll?.user?.id}}">{{ meetiStore.meetiAll?.user?.name }}</RouterLink> Creador de:
+                <RouterLink :to="{ name: 'admin' }">{{ meetiStore.meetiAll?.group?.title }}</RouterLink>
               </p>
             </div>
           </div>
