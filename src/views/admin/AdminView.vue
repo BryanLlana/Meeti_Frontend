@@ -60,7 +60,9 @@ onMounted(async () => {
             :key="group.id"
           >
             <div class="informacion-admin">
-              <h3>{{ group.title }}</h3>
+              <RouterLink :to="{ name: 'group', params: {id: group.id} }">
+                <h3>{{ group.title }}</h3>
+              </RouterLink>
             </div>
             <div class="acciones contenedor-botones">
               <RouterLink :to="{ name: 'edit-group', params: { id: group.id } }" class="btn btn-verde">Editar</RouterLink>

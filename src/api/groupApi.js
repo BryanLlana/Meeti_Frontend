@@ -13,6 +13,9 @@ export const groupApi = {
   findGroup: async id => {
     return await api.get(`/group/${id}`)
   },
+  findGroupPublic: async id => {
+    return await api.get(`/group/public/${id}`)
+  },
   updateGroup: async (id, data) => {
     return await api.patch(`/group/${id}`, data)
   },

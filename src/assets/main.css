@@ -763,3 +763,18 @@ aside img {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.informacion-grupo {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (width >= 768px){
+  .informacion-grupo {
+    grid-template-columns: 3fr 4fr;
+  }
+}
+
+.lista-meetis {
+  
+}

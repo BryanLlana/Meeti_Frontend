@@ -34,7 +34,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
             <img v-if="group.image" :src="`${BACKEND_URL}/files/group/${group.image}`" alt="">
           </div>
           <div class="texto">
-            <RouterLink :to="{ name: 'admin' }"><h3>{{ group.title }}</h3></RouterLink>
+            <RouterLink :to="{ name: 'group', params: {id: group.id} }"><h3>{{ group.title }}</h3></RouterLink>
           </div>
         </li>
       </ul>

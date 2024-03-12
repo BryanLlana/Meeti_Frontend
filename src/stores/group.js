@@ -28,6 +28,7 @@ export const useGroupStore = defineStore('group', () => {
   const imageNow = ref('')
 
   const groups = ref([])
+  const group = ref([])
 
   const getGroups = async () => {
     groups.value = []
@@ -36,6 +37,16 @@ export const useGroupStore = defineStore('group', () => {
       groups.value = data
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const getGroupPublic = async id => {
+    try {
+      const { data } = await groupApi.findGroupPublic(id)
+      group.value = data
+    } catch (error) {
+      console.log(error)
+      router.push({ name: 'home' })
     }
   }
 
@@ -183,6 +194,8 @@ export const useGroupStore = defineStore('group', () => {
     updateImage,
     deleteGroup,
     errorInput,
-    imageNow
+    imageNow,
+    getGroupPublic,
+    group
   }
 })

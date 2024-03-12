@@ -52,7 +52,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
               <p>Organizado por:</p>
               <p class="autor">
                 <RouterLink :to="{ name: 'user', params: { id: meetiStore.meetiAll?.user?.id}}">{{ meetiStore.meetiAll?.user?.name }}</RouterLink> Creador de:
-                <RouterLink :to="{ name: 'admin' }">{{ meetiStore.meetiAll?.group?.title }}</RouterLink>
+                <RouterLink :to="{ name: 'group', params: {id: meetiStore.meetiAll?.group?.id} }">{{ meetiStore.meetiAll?.group?.title }}</RouterLink>
               </p>
             </div>
           </div>
