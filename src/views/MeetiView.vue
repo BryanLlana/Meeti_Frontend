@@ -20,16 +20,18 @@ onMounted(async () => {
 })
 
 const register = async () => {
+  await meetiStore.confirmAssistance(meetiStore?.meetiAll?.id, button.value)
   button.value = !button.value
   if (button.value) {
     assistanceQuantity.value = ++assistanceQuantity.value
-    console.log(assistanceQuantity.value)
   } else {
     assistanceQuantity.value = --assistanceQuantity.value
-    console.log(assistanceQuantity.value)
   }
-  await meetiStore.confirmAssistance(meetiStore?.meetiAll?.id)
 }
+
+const isCreator = computed(() => {
+  return meetiStore.meetiAll?.user?.id === authStore.userAuth.id
+})
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 </script>
@@ -57,7 +59,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
         </div>
         
         <div v-if="authStore.userAuth.id" class="pregunta-asistencia">
-          <div>
+          <div v-if="!isCreator">
             <p>{{ button ? 'Ya estás registrado' : '¿Asistirás?' }}</p>
             <button
               @click="register"
@@ -67,6 +69,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
             >{{button ? 'Cancelar' : 'SI'}}
             </button>
           </div>
+          <div v-else>Tú creaste este meeti</div>
         </div>
         <p v-else>Iniciar Sesión para confirmar tu asistencia</p>
       </div>

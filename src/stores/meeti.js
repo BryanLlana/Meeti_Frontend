@@ -202,10 +202,13 @@ export const useMeetiStore = defineStore('meeti', () => {
     }
   }
 
-  const confirmAssistance = async id => {
+  const confirmAssistance = async (id, button) => {
     try {
       await meetiApi.registerUserMeeti(id)
-      router.push({ name: 'meeti', params: { id }})
+      toast.open({
+        message: button ? 'Asistencia cancelada' : 'Asistencia confirmada',
+        type: 'success'
+      })
     } catch (error) {
       console.log(error)
     }
