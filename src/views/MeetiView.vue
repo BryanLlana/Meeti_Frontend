@@ -3,7 +3,7 @@ import MeetiLayout from '@/layout/MeetiLayout.vue';
 import { useAuthStore } from '@/stores/auth';
 import { onMounted, computed, ref } from 'vue';
 import { useMeetiStore } from '@/stores/meeti';
-import { useRoute } from 'vue-router';
+import { useRoute, RouterLink } from 'vue-router';
 import { formatDate } from '@/helpers';
 
 const authStore = useAuthStore()
@@ -85,7 +85,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
           <div class="asistentes">
             <div class="titulo">
               <h3>{{assistanceQuantity}} Asistentes</h3>
-              <a href="#">Ver todos</a>
+              <RouterLink :to="{name: 'assistants', params: { id: meetiStore.meetiAll.id}}">Ver todos</RouterLink>
             </div>
           </div>
 

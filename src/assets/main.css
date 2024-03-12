@@ -30,6 +30,7 @@ a {
 .contenedor {
   max-width: 1200px;
   margin: 0 auto;
+  width: 95%;
 }
 img {
   max-width: 100%;
@@ -708,4 +709,29 @@ aside img {
 
 .assist.aqua {
   background-color: #068D9D;
+}
+
+.no-asistentes {
+  text-align: center;
+}
+
+.listado-asistentes {
+  display: flex;
+  flex-direction: column;
+}
+
+.imagen-assist {
+  height: 50px;
+  width: 50px;
+  background-color: #333;
+  border-radius: 50%;
+}
+
+.lista-asistente {
+  display: flex;
+  border: 1px solid #888888;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: .5rem 0 .5rem 0;
 }

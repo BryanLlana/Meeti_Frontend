@@ -84,6 +84,11 @@ const router = createRouter({
       path: '/meeti/:id',
       name: 'meeti',
       component: () => import('@/views/MeetiView.vue')
+    },
+    {
+      path: '/asistentes-meeti/:id',
+      name: 'assistants',
+      component: () => import('@/views/AssistantsMeetiView.vue')
     }
   ]
 })

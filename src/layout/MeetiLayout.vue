@@ -40,4 +40,4 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
     </nav>
     <p class="copyright">Todos los derechos reservados Meeti {{ new Date().getFullYear() }} &copy;</p>
   </footer>
-</template>import { useAuthStore } from '@/stores/auth';
+</template>
