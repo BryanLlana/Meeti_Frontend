@@ -22,6 +22,9 @@ export const meetiApi = {
   getAllMeetis: async (limit = 0) => {
     return await api.get(`/meeti/public?limit=${limit}`)
   },
+  getAllMeetisCategory: async (category = 0) => {
+    return await api.get(`/meeti/public?category=${category}`)
+  },
   getAllMeeti: async id => {
     return await api.get(`/meeti/public/${id}`)
   }
