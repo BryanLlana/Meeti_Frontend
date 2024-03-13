@@ -44,7 +44,7 @@ onMounted(async () => {
             </div>
             <div class="acciones contenedor-botones">
               <RouterLink :to="{ name: 'edit-meeti', params: { id: meeti.id } }" class="btn btn-verde">Editar</RouterLink>
-              <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Asistentes</RouterLink>
+              <RouterLink :to="{ name: 'assistants', params: { id: meeti.id } }" class="btn btn-azul2">Asistentes</RouterLink>
               <RouterLink :to="{ name: 'delete-meeti', params: { id: meeti.id } }" class="btn btn-rojo">Eliminar</RouterLink>
             </div>
           </li>
@@ -88,7 +88,7 @@ onMounted(async () => {
             </div>
             <div class="acciones contenedor-botones">
               <RouterLink :to="{ name: 'edit-meeti', params: { id: meeti.id } }" class="btn btn-verde">Editar</RouterLink>
-              <RouterLink :to="{ name: 'admin' }" class="btn btn-azul2">Asistentes</RouterLink>
+              <RouterLink :to="{ name: 'assistants', params: { id: meeti.id } }" class="btn btn-azul2">Asistentes</RouterLink>
               <RouterLink :to="{ name: 'delete-meeti', params: { id: meeti.id } }" class="btn btn-rojo">Eliminar</RouterLink>
             </div>
           </li>
