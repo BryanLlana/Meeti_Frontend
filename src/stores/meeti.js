@@ -94,7 +94,7 @@ export const useMeetiStore = defineStore('meeti', () => {
     if (Object.values(errorInput.value).length === 0) {
       try {
         editMeeti.quota = editMeeti.quota === '' ? 0 : parseInt(editMeeti.quota)
-        const { id, ...values } = editMeeti
+        const { id, comments, ...values } = editMeeti
         await meetiApi.updateMeeti(editMeeti.id, values)
         Object.assign(editMeeti, {
           id: '',

@@ -5,16 +5,20 @@ import { onMounted, computed, ref } from 'vue';
 import { useMeetiStore } from '@/stores/meeti';
 import { useRoute, RouterLink } from 'vue-router';
 import { formatDate } from '@/helpers';
+import { useCommentStore } from '@/stores/comment';
 
 const authStore = useAuthStore()
 const meetiStore = useMeetiStore()
+const commentStore = useCommentStore()
 const route = useRoute()
 const button = ref(false)
 const assistanceQuantity = ref(0)
 
+
 onMounted(async () => {
   await authStore.getUserAuth()
   await meetiStore.getAllMeeti(route.params.id)
+  commentStore.comments = meetiStore.meetiAll.comments
   button.value = meetiStore.meetiAll?.users?.some(user => user.id === authStore.userAuth.id)
   assistanceQuantity.value = meetiStore.meetiAll.users.length
 })
@@ -91,35 +95,34 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
           <div class="comentarios">
             <h2>Comentarios</h2>
-            <div class="comentario">
-              <div class="imagen">
-
+            <p v-if="meetiStore.meetiAll?.comments?.length === 0">No hay comentarios aún</p>
+            <div 
+              v-else
+              v-for="comment in meetiStore.meetiAll?.comments"
+              class="comentario"
+            >
+              <div>
+                <img v-if="comment.user.image" :src="`${BACKEND_URL}/files/profile/${comment.user.image}`" class="imagen" />
+                <div v-else class="imagen"></div>
               </div>
               <div class="texto">
-                <p>Hola</p>
-                <p>Escrito por: <span>Juan</span></p>
+                <p>{{ comment.message }}</p>
+                <p>Escrito por: <span>{{ comment.user.name }}</span></p>
                 <input type="button" value="Eliminar" class="btn btn-azul">
               </div>
             </div>
-            <div class="comentario">
-              <div class="imagen">
-
-              </div>
-              <div class="texto">
-                <p>Hola</p>
-                <p>Escrito por: <span>Juan</span></p>
-              </div>
-            </div>
-            <form class="default-form comentarios">
+            <form @submit.prevent="() => commentStore.createComment(meetiStore.meetiAll?.id)" v-if="authStore.userAuth?.email" class="default-form comentarios">
               <legend>Agrega un Comentario</legend>
               <div class="campo">
                 <label>Comentario</label>
-                <textarea></textarea>
+                <textarea v-model="commentStore.message"></textarea>
               </div>
+              <p class="error-input" v-if="commentStore.errorInput.message">{{ commentStore.errorInput.message }}</p>
               <div class="campo enviar">
                 <input type="submit" value="Enviar" class="btn btn-rosa">
               </div>
             </form>
+            <p v-else>Inicia Sesión para agregar un comentario</p>
           </div>
         </div>
 
