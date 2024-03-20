@@ -18,7 +18,6 @@ onMounted(async () => {
 <template>
   <MeetiLayout :userAuth="authStore.userAuth" :logout="authStore.logout">
     <Hero />
-    <Searcher />
     <Meetis />
     <Categories />
     <MeetiBg />
