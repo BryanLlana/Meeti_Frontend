@@ -101,7 +101,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
               v-for="comment in commentStore.comments"
               class="comentario"
             >
-              <div>
+              <div class="comment">
                 <img v-if="comment.user.image" :src="`${BACKEND_URL}/files/profile/${comment.user.image}`" class="imagen" />
                 <div v-else class="imagen"></div>
               </div>
