@@ -27,9 +27,32 @@ export const useCommentStore = defineStore('comment', () => {
     }
   }
 
+  const getComments = async id => {
+    try {
+      const { data } = await commentApi.getComments(id)
+      comments.value = data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const deleteComment = async id => {
+    try {
+      await commentApi.deleteComment(id)
+      toast.open({
+        message: 'Comentario eliminado correctamente',
+        type: 'success'
+      })
+      comments.value = comments.value.filter(comment => comment.id !== id)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return {
     createComment,
+    getComments,
+    deleteComment,
     message,
     comments,
     errorInput

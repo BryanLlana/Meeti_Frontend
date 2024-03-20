@@ -18,7 +18,7 @@ const assistanceQuantity = ref(0)
 onMounted(async () => {
   await authStore.getUserAuth()
   await meetiStore.getAllMeeti(route.params.id)
-  commentStore.comments = meetiStore.meetiAll.comments
+  await commentStore.getComments(meetiStore.meetiAll.id)
   button.value = meetiStore.meetiAll?.users?.some(user => user.id === authStore.userAuth.id)
   assistanceQuantity.value = meetiStore.meetiAll.users.length
 })
@@ -98,7 +98,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
             <p v-if="meetiStore.meetiAll?.comments?.length === 0">No hay comentarios aún</p>
             <div 
               v-else
-              v-for="comment in meetiStore.meetiAll?.comments"
+              v-for="comment in commentStore.comments"
               class="comentario"
             >
               <div>
@@ -108,7 +108,13 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
               <div class="texto">
                 <p>{{ comment.message }}</p>
                 <p>Escrito por: <span>{{ comment.user.name }}</span></p>
-                <input type="button" value="Eliminar" class="btn btn-azul">
+                <input
+                  v-if="comment.user.id === authStore.userAuth.id"
+                  @click="() => commentStore.deleteComment(comment.id)" 
+                  type="button" 
+                  value="Eliminar" 
+                  class="btn btn-azul"
+                >
               </div>
             </div>
             <form @submit.prevent="() => commentStore.createComment(meetiStore.meetiAll?.id)" v-if="authStore.userAuth?.email" class="default-form comentarios">
